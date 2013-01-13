@@ -5,10 +5,11 @@
   '(;; Java types such as #<Method ....>
     (lambda (value) 
       (replace-regexp-in-string "#<[[:alpha:]]+\\([[:ascii:]]+?\\)>" "\"\\1\"" value))
-    'quote-clojure-sets)                      ;; Clojure sets
+    quote-clojure-sets)                      ;; Clojure sets
   "Translate the output from Clojure into values that can be read by elisp.")
 
 (defun quote-clojure-sets (value &optional start)
+  (debug "quote-clojure-sets")
   "Wrap clojure sets in quotes."
   (let ((start (if (null start) 0 start))
         (pos (string-match "#{" value start)))
@@ -62,6 +63,7 @@
 (defun nrepl-inspect-clean-value (value)
   "Make java types readable (both for humans and the elisp reader)."
   (reduce (lambda (value translation)
+            (debug "here")
             (funcall translation value))
           nrepl-inspect-translations
           :initial-value value))
