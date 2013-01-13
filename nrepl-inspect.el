@@ -13,8 +13,8 @@
 
 (defun nrepl-inspect-print-value (value)
   (cond ((stringp value) (insert value))
-        ((symbolp value) (insert (format "%s" value)))
-        ((listp value) (nrepl-inspect-print-list value))))
+        ((listp value) (nrepl-inspect-print-list value))
+        (t (insert (format "%s" value)))))
 
 (defun nrepl-inspect-print-result (buffer result)
   (with-current-buffer buffer
