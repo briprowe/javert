@@ -9,16 +9,16 @@
   "Translate the output from Clojure into values that can be read by elisp.")
 
 (defun quote-clojure-sets (value &optional start)
-  (debug "quote-clojure-sets")
   "Wrap clojure sets in quotes."
   (let ((start (if (null start) 0 start))
         (pos (string-match "#{" value start)))
     (if (null pos)
         value
       (let ((brace-end (find-braces value "{" "}" pos)))
-        (quote-clojure-sets (replace-in-string value
-                                               (substring value pos brace-end)
-                                               (format "\"%s\"" (substring value pos brace-end)))
+        (quote-clojure-sets (format "%s\"%s\"%s"
+                                    (substring value 0 pos)
+                                    (substring value pos brace-end)
+                                    (substring value brace-end (length value)))
                             (+ brace-end 2))))))
 
 ;; FIXME: There is probably a much better way to do this... perhaps
@@ -63,7 +63,6 @@
 (defun nrepl-inspect-clean-value (value)
   "Make java types readable (both for humans and the elisp reader)."
   (reduce (lambda (value translation)
-            (debug "here")
             (funcall translation value))
           nrepl-inspect-translations
           :initial-value value))
