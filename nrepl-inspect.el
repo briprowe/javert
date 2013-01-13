@@ -33,7 +33,7 @@
        ((and (equal cur-char end-brace) (= depth 1))
         pos)
 
-       ((and (equal cur-char end-brace) (> depth 0))
+       ((and (equal cur-char end-brace) (> depth 1))
         (find-braces string start-brace end-brace pos (1- depth)))
 
        ((and (equal cur-char start-brace))
