@@ -41,10 +41,9 @@
        (t (find-braces string start-brace end-brace pos depth))))))
 
 (defun nrepl-inspect-clj-string (ns symbol)
-  (let ((header (format "\"Inspecting symbol: %s\"" symbol)))
-    (format "%s" `(do (require 'inspector.javert)
-                      (in-ns ,(format "'%s" ns))
-                      (inspector.javert/inspect ,(format "%s" symbol))))))
+  (format "%s" `(do (require 'inspector.javert)
+                    (in-ns ,(format "'%s" ns))
+                  (inspector.javert/inspect ,(format "%s" symbol)))))
 
 (defun nrepl-inspect-print-list (value)
   (cond ((eq (car value) :value) (nrepl-inspect-print-value (cadr value)))
