@@ -1,20 +1,36 @@
 # javert
 
-A Clojure library designed to enable you to inspect your Clojure data.
+> Tell me quickly what's the story  
+> Who saw what and why and where  
+> Let him give a full description  
+> Let him answer to Javert!  
+> In this nest of whores and vipers  
+> Let one speak who saw it all  
+> Who laid hands on this good man here?  
+> What's the substance of this brawl?  
 
-## Installation
+- Inspector Javert, _Les Miserables_
 
-1. Add `[javert "0.1.0-SNAPSHOT"]` to your leiningen
-user profile.
-2. Add the line `(load "/path/to/nrepl-inspector.el)` to your emacs setup.
+Extracted from [swank-clojure](https://github.com/technomancy/swank-clojure).
 
 ## Usage
 
-In an emacs buffer with nrepl and nrepl-inspector loaded, `M-x
-nrepl-inspect` will inspect the value of the symbol under point.
+```clj
+(use 'inspector.javert)
+(inspect-print java.io.File)
+```
+
+```
+Type: class java.lang.Class
+
+--- Interfaces: 
+  interface java.io.Serializable
+  interface java.lang.Comparable
+[...]
+```
 
 ## License
 
-Copyright © 2013 FIXME
+Copyright © 2013 Seattle Clojure Group, Jeffrey Chu.
 
 Distributed under the Eclipse Public License, the same as Clojure.
